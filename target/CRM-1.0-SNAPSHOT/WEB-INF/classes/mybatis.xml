@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--日志-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+        <!--domain包中的类名就是别名-->
+        <package name="com.erha.CRM.settings.domain"/>
+        <package name="com.erha.CRM.workbench.domain"/>
+    </typeAliases>
+
+    <!--分页查询-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor" />
+    </plugins>
+
+    <mappers>
+        <!--加载dao包中的所有mapper文件-->
+        <package name="com.erha.CRM.settings.dao"/>
+        <package name="com.erha.CRM.workbench.dao"/>
+    </mappers>
+</configuration>

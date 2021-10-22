@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.erha.CRM.workbench.dao.ContactsDao">
+    <sql id="attribute">
+        `id`,`owner`,`source`,`customerId`,`fullname`,`appellation`,`email`,`mphone`,`job`,`birth`,`createBy`,`createTime`,`editBy`,`editTime`,`description`,`contactSummary`,`nextContactTime`,`address`
+    </sql>
+    <insert id="insertContacts" parameterType="com.erha.CRM.workbench.domain.Contacts">
+        insert into tbl_contacts(<include refid="attribute"/>) values
+        (#{id},#{owner},#{source},#{customerId},#{fullname},#{appellation},#{email},#{mphone},#{job},#{birth},#{createBy},#{createTime},#{editBy},#{editTime},#{description},#{contactSummary},#{nextContactTime},#{address})
+    </insert>
+  	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

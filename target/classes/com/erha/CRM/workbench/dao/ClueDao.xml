@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.erha.CRM.workbench.dao.ClueDao">
+	<sql id="attribute">
+        `id`,`fullname`,`appellation`,`owner`,`company`,`job`,`email`,`phone`,`website`,`mphone`,`state`,`source`,`createBy`,`createTime`,`editBy`,`editTime`,`description`,`contactSummary`,`nextContactTime`,`address`
+    </sql>
+    <sql id="value">
+        #{id},#{fullname},#{appellation},#{owner},#{company},#{job},#{email},#{phone},#{website},#{mphone},#{state},#{source},#{createBy},#{createTime},#{editBy},#{editTime},#{description},#{contactSummary},#{nextContactTime},#{address}
+    </sql>
+
+	<insert id="insertInToClue" parameterType="com.erha.CRM.workbench.domain.Clue">
+        insert into `tbl_clue`(<include refid="attribute"/>) values (<include refid="value"/>)
+    </insert>
+
+    <select id="selectClues" resultType="com.erha.CRM.workbench.domain.Clue">
+        select <include refid="attribute"/> from `tbl_clue`
+    </select>
+
+    <select id="selectClueUserVo" resultType="com.erha.CRM.workbench.domain.vo.ClueUserVo">
+        select c.`id`,`fullname`,`appellation`,`owner`,`company`,`phone`,`mphone`,`state`,`source`,u.`name` as userName
+        from `tbl_clue` c
+        left outer join `tbl_user` u
+        on c.`owner` = u.id
+    </select>
+
+    <select id="selectCluesById" parameterType="java.lang.String" resultType="com.erha.CRM.workbench.domain.Clue">
+        select <include refid="attribute"/> from `tbl_clue` where id = #{id}
+    </select>
+
+    <select id="queryActivityUserVo" parameterType="java.lang.String" resultType="com.erha.CRM.workbench.domain.vo.ActivityUserVo">
+        select a.id id, u.name userName,a.name activityName,a.startDate startDate, a.endDate endDate
+        from tbl_clue_activity_relation car
+        join tbl_activity  a
+        on car.`activityId` = a.`id`
+        join tbl_user  u
+        on a.`owner` = u.`id`
+        where car.clueId = #{clueId}
+    </select>
+
+    <delete id="deleteClueById" parameterType="java.lang.String">
+        delete from tbl_clue where `id` = #{id}
+    </delete>
+  	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

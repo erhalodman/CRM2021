@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.erha.CRM.workbench.dao.CustomerDao">
+    <sql id="attribute">
+        `id`,`owner`,`name`,`website`,`phone`,`createBy`,`createTime`,`editBy`,`editTime`,`contactSummary`,`nextContactTime`,`description`,`address`
+    </sql>
+	<select id="selectCustomer" resultType="com.erha.CRM.workbench.domain.Customer">
+        select <include refid="attribute"/> from tbl_customer where `name`=#{name} and `website`=#{website} and `phone`=#{phone}
+    </select>
+
+    <insert id="insertCustomer" parameterType="com.erha.CRM.workbench.domain.Customer">
+        insert into tbl_customer(<include refid="attribute"/>) values
+        (#{id},#{owner},#{name},#{website},#{phone},#{createBy},#{createTime},#{editBy},#{editTime},#{contactSummary},#{nextContactTime},#{description},#{address})
+    </insert>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

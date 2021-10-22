@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erha.CRM.workbench.dao.ClueRemarkDao">
+	<sql id="attribute">
+        `id`,`noteContent`,`createBy`,`createTime`,`editBy`,`editTime`,`editFlag`,`clueId`
+    </sql>
+    <select id="selectClueRemarkByClueId" parameterType="java.lang.String" resultType="com.erha.CRM.workbench.domain.ClueRemark">
+        select <include refid="attribute"/> from tbl_clue_remark where `clueId` = #{clueId}
+    </select>
+
+    <delete id="deleteClueRemark" parameterType="java.lang.String">
+        delete from tbl_clue_remark where clueId = #{clueId}
+    </delete>
+  	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

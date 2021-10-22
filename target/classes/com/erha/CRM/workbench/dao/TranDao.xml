@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.erha.CRM.workbench.dao.TranDao">
+	<sql id="attribute">
+        `id`,`owner`,`money`,`name`,`expectedDate`,`customerId`,`stage`,`type`,`source`,`activityId`,`contactsId`,`createBy`,`createTime`,`editBy`,`editTime`,`description`,`contactSummary`,`nextContactTime`
+    </sql>
+
+  	<insert id="insertTran" parameterType="com.erha.CRM.workbench.domain.Tran">
+        insert into tbl_tran(<include refid="attribute"/>) values
+        (#{id},#{owner},#{money},#{name},#{expectedDate},#{customerId},#{stage},#{type},#{source},#{activityId},#{contactsId},#{createBy},#{createTime},#{editBy},#{editTime},#{description},#{contactSummary},#{nextContactTime})
+    </insert>
+
+    <select id="selectTranUserActivityVo" resultType="com.erha.CRM.workbench.domain.vo.TranUserActivityVo">
+        select t.`id`,t.`owner`,u.`name` ownerName,t.`money`,t.`name`,t.`expectedDate`,t.`customerId`,c.`name` customerName,t.`stage`,t.`type`,t.`source`,t.`activityId`,a.`name` activityName,t.`contactsId`,con.`fullname` contactsName,t.`createBy`,t.`createTime`,t.`editBy`,t.`editTime`,t.`description`,t.`contactSummary`,t.`nextContactTime`
+        from tbl_tran t
+        left outer join tbl_activity a
+        on t.activityId = a.id
+        left outer join tbl_user u
+        on t.owner = u.id
+        left outer join tbl_customer c
+        on t.customerId = c.id
+        left outer join tbl_contacts con
+        on t.contactsId = con.id
+    </select>
+
+    <select id="selectTranUserActivityVoById" resultType="com.erha.CRM.workbench.domain.vo.TranUserActivityVo">
+        select t.`id`,t.`owner`,u.`name` ownerName,t.`money`,t.`name`,t.`expectedDate`,t.`customerId`,c.`name` customerName,t.`stage`,t.`type`,t.`source`,t.`activityId`,a.`name` activityName,t.`contactsId`,con.`fullname` contactsName,t.`createBy`,t.`createTime`,t.`editBy`,t.`editTime`,t.`description`,t.`contactSummary`,t.`nextContactTime`
+        from tbl_tran t
+        left outer join tbl_activity a
+        on t.activityId = a.id
+        left outer join tbl_user u
+        on t.owner = u.id
+        left outer join tbl_customer c
+        on t.customerId = c.id
+        left outer join tbl_contacts con
+        on t.contactsId = con.id
+        where t.`id` =  #{id}
+    </select>
+
+    <update id="updateStage" parameterType="com.erha.CRM.workbench.domain.Tran">
+        update tbl_tran set `stage` = #{stage},`editBy` = #{editBy},`editTime` = #{editTime} where `id` = #{id}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erha.CRM.workbench.dao.ActivityRemarkDao">
+    <sql id="attribute">
+        `id`,`noteContent`,`createTime`,`createBy`,`editTime`,`editBy`,`editFlag`,`activityId`,`owner`
+    </sql>
+    <insert id="insertActivityRemark" parameterType="com.erha.CRM.workbench.domain.ActivityRemark">
+        insert into tbl_activity_remark(<include refid="attribute"/>) values
+        (#{id},#{noteContent},#{createTime},#{createBy},#{editTime},#{editBy},#{editFlag},#{activityId},#{owner})
+    </insert>
+
+    <select id="selectPageInfoByid" parameterType="java.lang.String" resultType="com.erha.CRM.workbench.domain.ActivityRemark">
+        select <include refid="attribute"/> from tbl_activity_remark where `activityId` = #{activityId}
+        order by `createTime` asc
+    </select>
+
+    <select id="selectById" parameterType="java.lang.String" resultType="com.erha.CRM.workbench.domain.ActivityRemark">
+        select <include refid="attribute"/> from tbl_activity_remark where `id` = #{id}
+    </select>
+
+    <update id="updateRemark" parameterType="com.erha.CRM.workbench.domain.ActivityRemark">
+        update tbl_activity_remark set `noteContent` = #{noteContent},`editTime` = #{editTime},`editBy` = #{editBy},`editFlag` = #{editFlag}
+        where `id` = #{id}
+    </update>
+
+    <delete id="deleteRemark" parameterType="java.lang.String">
+        delete from tbl_activity_remark where `id` = #{id}
+    </delete>
+</mapper>
